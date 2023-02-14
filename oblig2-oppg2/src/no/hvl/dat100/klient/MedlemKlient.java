@@ -1,6 +1,5 @@
 package no.hvl.dat100.klient;
 
-import no.hvl.dat100.Hobby;
 import no.hvl.dat100.Medlem;
 
 import java.util.Arrays;

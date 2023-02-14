@@ -55,12 +55,21 @@ public class Tekstgrensenitt {
 		return medlem;
 	}
 
-	// Skriver ut hobbylisten for et medlem
+	/**
+	 * Skriver ut hobbylisten for et medlem
+	 *
+	 * @param medlem Medlemet som skal få hobbylisten printet ut
+	 */
 	public static void skrivHobbyListe(Medlem medlem) {
 		System.out.println("Alle hobbyene ");
 		System.out.println(medlem.getHobbyer().toString());
 	}
 
+	/**
+	 * Skriver ut en oversikt over alle medlemmer som er koblet til hverandre som par
+	 *
+	 * @param arkiv Datakontakt hvor paroversikt skal skrives ut
+	 */
 	public static void skrivParListe(Datakontakt arkiv) {
 		/* skriver ut på skjermen en oversikt over medlemmer som er koblet
 		til hverandre i medlemstabellen til enhver tid.
@@ -76,5 +85,22 @@ public class Tekstgrensenitt {
 		…………………….
 		Antall par funnet: 12
 		*/
+		KjedetMengde<Integer> funnet = new KjedetMengde<>();
+		int x = 0;
+		for (int i = 0; i < arkiv.getAntallMedlemmer(); i++) {
+			StringBuilder par = new StringBuilder();
+			Medlem medlem = arkiv.getMedlemsListe()[i];
+			if (medlem.getStatusIndeks() != -1 && !funnet.inneholder(i)) {
+				par.append(medlem.getNavn())
+				   .append(" og ")
+				   .append(arkiv.getMedlemsListe()[medlem.getStatusIndeks()].getNavn());
+				par.append("\n").append(medlem.getHobbyer());
+				funnet.leggTil(i);
+				funnet.leggTil(medlem.getStatusIndeks());
+				System.out.println(par);
+				x++;
+			}
+		}
+		System.out.println("Antall par funnet: " + x);
 	}
 }

@@ -1,7 +1,5 @@
 package no.hvl.dat100;
 
-import java.util.Arrays;
-
 public class Datakontakt {
 	private Medlem[] medlemsListe;
 	private int antallMedlemmer;
@@ -16,6 +14,7 @@ public class Datakontakt {
 
 	/**
 	 * Oppretter en ny datakontrakt med en medlemsliste som kan holde spesifisert antall medlemmer
+	 *
 	 * @param antall Antall medlemmer listen skal holde
 	 */
 	public Datakontakt(int antall) {
@@ -24,8 +23,8 @@ public class Datakontakt {
 	}
 
 	/**
-	 * Legger til et nytt medlem i medlemsliste <br>
-	 * Utvider intern medlemstabell når nødvendig
+	 * Legger til et nytt medlem i medlemsliste <br> Utvider intern medlemstabell når nødvendig
+	 *
 	 * @param person Medlem som skal legges inn
 	 */
 	public void leggTilMedlem(Medlem person) {
@@ -47,7 +46,9 @@ public class Datakontakt {
 
 	/**
 	 * Finner indeks i medlemliste for medlemmet med spesifisert navn, eller -1 hvis det ikke finnes
+	 *
 	 * @param medlemsnavn Medlem å lete etter
+	 *
 	 * @return Indeks til medlemmet, eller -1 hvis det ikke finnes
 	 */
 	public int finnMedlemsIndeks(String medlemsnavn) {
@@ -61,16 +62,20 @@ public class Datakontakt {
 	}
 
 	/**
-	 * Finner en partner til et medlem i medlemlisten. <br>
-	 * Returnerer indeks til funnet medlem eller -1 hvis ingen blir funnet
+	 * Finner en partner til et medlem i medlemlisten, og oppdaterer medlem og partner. <br> Returnerer indeks til funnet medlem eller -1 hvis
+	 * ingen blir funnet
+	 *
 	 * @param medlemsnavn Medlemmet som vi skal finne partner til
+	 *
 	 * @return Indeks til partner som blir funnet, eller -1 hvis ingen blir funnet
 	 */
 	public int finnPartnerFor(String medlemsnavn) {
 		Medlem medlem = finnMedlem(medlemsnavn);
 		if (medlem == null) return -1;
 		for (int i = 0; i < antallMedlemmer; i++) {
-			if (medlemsListe[i].passerTil(medlem)) {
+			if (!medlemsListe[i].equals(medlem) && medlemsListe[i].passerTil(medlem) && medlemsListe[i].getStatusIndeks() == -1) {
+				medlemsListe[i].setStatusIndeks(finnMedlemsIndeks(medlemsnavn));
+				medlem.setStatusIndeks(i);
 				return i;
 			}
 		}
@@ -85,13 +90,15 @@ public class Datakontakt {
 	}
 
 	/**
-	 * Tilbakestiller et medlem til å ikke ha partner <br>
-	 * Fjerner også statusindeks fra partneren som peker til dette medlemmet
+	 * Tilbakestiller et medlem til å ikke ha partner <br> Fjerner også statusindeks fra partneren som peker
+	 * til dette medlemmet
+	 *
 	 * @param medlemsnavn medlemmet som skal få fjernet partneren sin
 	 */
 	public void tilbakestillStausIndeks(String medlemsnavn) {
 		int medlemIndeks = finnMedlemsIndeks(medlemsnavn);
-		if (medlemsListe[medlemIndeks].getStatusIndeks() != -1 && medlemsListe[medlemsListe[medlemIndeks].getStatusIndeks()] != null) {
+		if (medlemsListe[medlemIndeks].getStatusIndeks() != -1 &&
+		    medlemsListe[medlemsListe[medlemIndeks].getStatusIndeks()] != null) {
 			medlemsListe[medlemsListe[medlemIndeks].getStatusIndeks()].setStatusIndeks(-1);
 			medlemsListe[medlemIndeks].setStatusIndeks(-1);
 
@@ -108,10 +115,15 @@ public class Datakontakt {
 
 	@Override
 	public String toString() {
-		// todo fiks på denne til å kun inkludere plasser i tabell som inneholder medlemmer
 		final StringBuilder sb = new StringBuilder("Datakontakt{");
 		sb.append("antallMedlemmer=").append(antallMedlemmer);
-		sb.append(", medlemsListe=").append(Arrays.toString(medlemsListe));
+		sb.append(", medlemsListe={");
+		for (int i = 0; i < antallMedlemmer; i++) {
+			sb.append(medlemsListe[i]);
+			if (i < antallMedlemmer - 1) {
+				sb.append(", ");
+			}
+		}
 		sb.append('}');
 		return sb.toString();
 	}
