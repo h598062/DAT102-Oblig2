@@ -234,4 +234,15 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 		antall++;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder("KjedetMengde:");
+		sb.append(antall);
+		sb.append("{");
+		for (T e : this) {
+			sb.append(e).append(", ");
+		}
+		sb.append('}');
+		return sb.toString();
+	}
 }
