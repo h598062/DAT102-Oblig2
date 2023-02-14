@@ -18,6 +18,8 @@ public class DatakontaktKlient {
 		Medlem m2 = new Medlem("Kristian", h1);
 		Medlem m3 = new Medlem("Bjørnar");
 		m3.leggTilHobby("is");
+		System.out.println("\nKristian sine hobbyer:");
+		Tekstgrensenitt.skrivHobbyListe(m2);
 		dk.leggTilMedlem(m1);
 		dk.leggTilMedlem(m2);
 		dk.leggTilMedlem(m3);

@@ -8,8 +8,7 @@ public class Datakontakt {
 	 * Oppretter en ny datakontrakt med en medlemsliste som kan holde 20 medlemmer
 	 */
 	public Datakontakt() {
-		this.medlemsListe = new Medlem[20];
-		this.antallMedlemmer = 0;
+		this(20);
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class Datakontakt {
 	 * @return Indeks til medlemmet, eller -1 hvis det ikke finnes
 	 */
 	public int finnMedlemsIndeks(String medlemsnavn) {
-		if (medlemsnavn.length() == 0) return -1;
+		if (medlemsnavn == null || medlemsnavn.length() == 0) return -1;
 		for (int i = 0; i < antallMedlemmer; i++) {
 			if (medlemsListe[i].getNavn().equals(medlemsnavn)) {
 				return i;
@@ -62,9 +61,9 @@ public class Datakontakt {
 	}
 
 	/**
-	 * Finner en partner til et medlem i medlemlisten, og oppdaterer medlem og partner. <br>
-	 * Denne vil kun matche partner hvis begge ha like hobbyer. <br>
-	 * Returnerer indeks til funnet medlem eller -1 hvis ingen blir funnet
+	 * Finner en partner til et medlem i medlemlisten, og oppdaterer medlem og partner. <br> Denne vil kun
+	 * matche partner hvis begge har like hobbyer. <br> Returnerer indeks til funnet medlem eller -1 hvis ingen
+	 * blir funnet
 	 *
 	 * @param medlemsnavn Medlemmet som vi skal finne partner til
 	 *
@@ -74,9 +73,10 @@ public class Datakontakt {
 		Medlem medlem = finnMedlem(medlemsnavn);
 		if (medlem == null) return -1;
 		for (int i = 0; i < antallMedlemmer; i++) {
-			if (!medlemsListe[i].equals(medlem) && medlemsListe[i].passerTil(medlem) &&
-			    medlemsListe[i].getStatusIndeks() == -1) {
-				medlemsListe[i].setStatusIndeks(finnMedlemsIndeks(medlemsnavn));
+			Medlem p = medlemsListe[i];
+			if (!p.equals(medlem) && p.passerTil(medlem) &&
+			    p.getStatusIndeks() == -1) {
+				p.setStatusIndeks(finnMedlemsIndeks(medlemsnavn));
 				medlem.setStatusIndeks(i);
 				return i;
 			}
@@ -92,7 +92,7 @@ public class Datakontakt {
 	 * @return Referanse til Medlem objektet som tilhører oppgitt navn
 	 */
 	private Medlem finnMedlem(String medlemsnavn) {
-		if (medlemsnavn.length() == 0) return null;
+		if (medlemsnavn == null || medlemsnavn.length() == 0) return null;
 		int indeks = finnMedlemsIndeks(medlemsnavn);
 		if (indeks == -1) return null;
 		return medlemsListe[indeks];
@@ -105,11 +105,11 @@ public class Datakontakt {
 	 * @param medlemsnavn medlemmet som skal få fjernet partneren sin
 	 */
 	public void tilbakestillStausIndeks(String medlemsnavn) {
-		int medlemIndeks = finnMedlemsIndeks(medlemsnavn);
-		if (medlemsListe[medlemIndeks].getStatusIndeks() != -1 &&
-		    medlemsListe[medlemsListe[medlemIndeks].getStatusIndeks()] != null) {
-			medlemsListe[medlemsListe[medlemIndeks].getStatusIndeks()].setStatusIndeks(-1);
-			medlemsListe[medlemIndeks].setStatusIndeks(-1);
+		Medlem m = finnMedlem(medlemsnavn);
+		if (m != null && m.getStatusIndeks() != -1 &&
+		    medlemsListe[m.getStatusIndeks()] != null) {
+			medlemsListe[m.getStatusIndeks()].setStatusIndeks(-1);
+			m.setStatusIndeks(-1);
 
 		}
 	}

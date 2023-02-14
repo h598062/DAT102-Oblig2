@@ -26,9 +26,10 @@ public class Tekstgrensenitt {
 		System.out.println("Skriv inn et nytt medlem");
 		System.out.print("Skriv inn navnet på det nye medlemmet: ");
 		String navn = scanner.nextLine();
-		if (navn.length() == 0) {
+		while (navn.length() == 0) {
 			System.out.println("Navnet til medlemmet må være minst et tegn, prøv igjen.");
-			lesMedlem();
+			System.out.print("Skriv inn navnet på det nye medlemmet: ");
+			navn = scanner.nextLine();
 		}
 		KjedetMengde<Hobby> hobbyer = new KjedetMengde<>();
 		System.out.println(
@@ -61,6 +62,7 @@ public class Tekstgrensenitt {
 	 * @param medlem Medlemet som skal få hobbylisten printet ut
 	 */
 	public static void skrivHobbyListe(Medlem medlem) {
+		if (medlem == null) return;
 		System.out.println("Alle hobbyene ");
 		System.out.println(medlem.getHobbyer().toString());
 	}
@@ -85,6 +87,7 @@ public class Tekstgrensenitt {
 		…………………….
 		Antall par funnet: 12
 		*/
+		if (arkiv == null) return;
 		KjedetMengde<Integer> funnet = new KjedetMengde<>();
 		int x = 0;
 		for (int i = 0; i < arkiv.getAntallMedlemmer(); i++) {

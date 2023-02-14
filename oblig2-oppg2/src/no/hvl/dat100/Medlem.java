@@ -9,7 +9,7 @@ public class Medlem {
 	private String navn;
 	private final MengdeADT<Hobby> hobbyer;
 	/**
-	 * Statusindeksen til partner i medlemstabell
+	 * Indeks i tabell til partner i medlemstabell
 	 */
 	private int statusIndeks;
 
@@ -42,7 +42,7 @@ public class Medlem {
 	/**
 	 * Oppretter et medlem med forhåndsdefinert mengde med hobbyer
 	 *
-	 * @param navn    navnet til medlemmet
+	 * @param navn     navnet til medlemmet
 	 * @param hobbytab en tabell med hobbynavn tekststrenger
 	 */
 	public Medlem(String navn, String[] hobbytab) {
@@ -70,12 +70,10 @@ public class Medlem {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder("Medlem{");
-		sb.append("navn='").append(navn).append('\'');
-		sb.append(", hobbyer=").append(hobbyer);
-		sb.append(", statusIndeks=").append(statusIndeks);
-		sb.append('}');
-		return sb.toString();
+		return "Medlem{" + "navn='" + navn + '\'' +
+		       ", hobbyer=" + hobbyer +
+		       ", statusIndeks=" + statusIndeks +
+		       '}';
 	}
 
 	public String getNavn() {
@@ -107,6 +105,7 @@ public class Medlem {
 	 * @return Sant hvis de har like hobbyer, usant hvis ikke
 	 */
 	public boolean passerTil(Medlem medlem2) {
+		if (medlem2 == null) return false;
 		return this.hobbyer.equals(medlem2.getHobbyer());
 	}
 
