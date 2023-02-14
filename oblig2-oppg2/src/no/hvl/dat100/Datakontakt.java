@@ -62,8 +62,9 @@ public class Datakontakt {
 	}
 
 	/**
-	 * Finner en partner til et medlem i medlemlisten, og oppdaterer medlem og partner. <br> Returnerer indeks til funnet medlem eller -1 hvis
-	 * ingen blir funnet
+	 * Finner en partner til et medlem i medlemlisten, og oppdaterer medlem og partner. <br>
+	 * Denne vil kun matche partner hvis begge ha like hobbyer. <br>
+	 * Returnerer indeks til funnet medlem eller -1 hvis ingen blir funnet
 	 *
 	 * @param medlemsnavn Medlemmet som vi skal finne partner til
 	 *
@@ -73,7 +74,8 @@ public class Datakontakt {
 		Medlem medlem = finnMedlem(medlemsnavn);
 		if (medlem == null) return -1;
 		for (int i = 0; i < antallMedlemmer; i++) {
-			if (!medlemsListe[i].equals(medlem) && medlemsListe[i].passerTil(medlem) && medlemsListe[i].getStatusIndeks() == -1) {
+			if (!medlemsListe[i].equals(medlem) && medlemsListe[i].passerTil(medlem) &&
+			    medlemsListe[i].getStatusIndeks() == -1) {
 				medlemsListe[i].setStatusIndeks(finnMedlemsIndeks(medlemsnavn));
 				medlem.setStatusIndeks(i);
 				return i;
@@ -82,6 +84,13 @@ public class Datakontakt {
 		return -1;
 	}
 
+	/**
+	 * Interm metode for å hente Medlem-objekt ut ifra medlemsnavn tekststreng
+	 *
+	 * @param medlemsnavn Navn til medlem som skal finnes
+	 *
+	 * @return Referanse til Medlem objektet som tilhører oppgitt navn
+	 */
 	private Medlem finnMedlem(String medlemsnavn) {
 		if (medlemsnavn.length() == 0) return null;
 		int indeks = finnMedlemsIndeks(medlemsnavn);
