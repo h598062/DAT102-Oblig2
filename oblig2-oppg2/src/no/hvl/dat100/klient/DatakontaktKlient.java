@@ -16,7 +16,7 @@ public class DatakontaktKlient {
 		h1.leggTil(new Hobby("Fotball"));
 		Medlem m1 = new Medlem("Storm", h1);
 		Medlem m2 = new Medlem("Kristian", h1);
-		Medlem m3 = new Medlem("Bjørnar");
+		Medlem m3 = new Medlem("Bjørnar☺");
 		m3.leggTilHobby("is");
 		System.out.println("\nKristian sine hobbyer:");
 		Tekstgrensenitt.skrivHobbyListe(m2);
