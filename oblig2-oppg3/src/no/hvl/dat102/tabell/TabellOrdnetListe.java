@@ -1,5 +1,7 @@
 package no.hvl.dat102.tabell;
 
+import java.util.Iterator;
+
 import no.hvl.dat102.adt.OrdnetListeADT;
 import no.hvl.dat102.exceptions.EmptyCollectionException;
 
@@ -26,8 +28,9 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 		}
 
 		T resultat = null;
-		resultat = liste[bak];
-		liste[bak] = null;
+		resultat = liste[bak - 1];
+		liste[bak - 1] = null;
+		bak--;
 		return resultat;
 	}
 
@@ -39,8 +42,8 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 		T resultat = null;
 		resultat = liste[0];
-		for(int i = 1; i < bak; i++) {
-			liste[i-1] = liste[i];
+		for (int i = 1; i < bak; i++) {
+			liste[i - 1] = liste[i];
 		}
 		return resultat;
 	}
@@ -78,7 +81,25 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 	@Override
 	public void leggTil(T element) {
-		
+		if (bak >= liste.length - 1) {
+			utvid();
+		}
+		int pos = 0;
+		boolean funnet = false;
+		while (!funnet && pos< bak) {
+			int noe = element.compareTo(liste[pos]);
+			if (noe == -1) {
+				funnet = true;
+			} else {
+				pos++;
+			}
+		}
+
+		for (int i = bak; i >= pos; i--) {
+			liste[i] = liste[i + 1];
+		}
+		liste[pos] = element;
+		bak++;
 	}
 
 	@Override
@@ -88,14 +109,33 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 	@Override
 	public T fjern(T element) {
-		// ...Fyll ut
+		if (erTom()) {
+			throw new EmptyCollectionException("ordnet liste");
+		}
+		
+		int pos = finn(element);
+		
+		for (int i = pos + 1; i < bak; i++) {
+			liste[i - 1] = liste[i];
+		}
+		bak--;
+		
 		return element;
 
 	}
 
 	private int finn(T el) {
-		int i = 0, resultat = IKKE_FUNNET;
-		// ...Fyll ut
+		int resultat = IKKE_FUNNET;
+		int pos = 0;
+		boolean funnet = false;
+		while (!funnet && pos<= bak) {
+			if (el.equals(liste[pos])) {
+				funnet = true;
+				resultat = pos;
+			} else {
+				pos++;
+			}
+		}
 		return resultat;
 	}
 
