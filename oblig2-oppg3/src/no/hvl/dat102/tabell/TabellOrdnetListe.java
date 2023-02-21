@@ -21,25 +21,35 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 	@Override
 	public T fjernSiste() {
-		if (erTom()) {throw new EmptyCollectionException("ordnet liste");}
+		if (erTom()) {
+			throw new EmptyCollectionException("ordnet liste");
+		}
 
 		T resultat = null;
-		// ... Fyll ut
+		resultat = liste[bak];
+		liste[bak] = null;
 		return resultat;
 	}
 
 	@Override
 	public T fjernFoerste() {
-		if (erTom()) {throw new EmptyCollectionException("ordnet liste");}
+		if (erTom()) {
+			throw new EmptyCollectionException("ordnet liste");
+		}
 
 		T resultat = null;
-		// ... Fyll ut
+		resultat = liste[0];
+		for(int i = 1; i < bak; i++) {
+			liste[i-1] = liste[i];
+		}
 		return resultat;
 	}
 
 	@Override
 	public T foerste() {
-		if (erTom()) {throw new EmptyCollectionException("ordnet liste");}
+		if (erTom()) {
+			throw new EmptyCollectionException("ordnet liste");
+		}
 
 		T resultat = liste[0];
 		return resultat;
@@ -47,10 +57,11 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 	@Override
 	public T siste() {
-		if (erTom()) {throw new EmptyCollectionException("ordnet liste");}
+		if (erTom()) {
+			throw new EmptyCollectionException("ordnet liste");
+		}
 
-		T resultat = null;
-		// ...Fyll ut
+		T resultat = liste[bak];
 
 		return resultat;
 	}
@@ -67,8 +78,7 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
 	@Override
 	public void leggTil(T element) {
-
-		// ...Fyll ut
+		
 	}
 
 	@Override

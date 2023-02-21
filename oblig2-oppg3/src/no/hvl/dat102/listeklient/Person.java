@@ -50,9 +50,23 @@ public class Person implements Comparable<Person> {
 
 	public int compareTo(Person denAndrePersonen) {
 		int resultat = 0;
-		//... Fyll ut
-		// Kall på compareTo i Stringklassen
+		// Sammenlign fødselsår
+		if (foedselsaar < denAndrePersonen.getFoedselsaar()) {
+			resultat = -1;
+		} else if (foedselsaar == denAndrePersonen.getFoedselsaar()) {
+			// Hvis fødselsår er likt, sammenlign etternavn
+			int etellerannet = etternavn.compareTo(denAndrePersonen.getEtternavn());
+			if (etellerannet == 0) {
+				etellerannet = fornavn.compareTo(denAndrePersonen.getFornavn());
+				resultat = etellerannet;
+			} else {
+				resultat = etellerannet;
+			}
+
+		} else {
+			resultat = 1;
+		}
 		return resultat;
-	}//
+	}
 
 }// class
