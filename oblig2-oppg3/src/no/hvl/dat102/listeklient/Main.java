@@ -7,7 +7,7 @@ import no.hvl.dat102.kjedet.KjedetOrdnetListe;
 public class Main {
 
 	public static void main(String[] args) {
-		KjedetOrdnetListe<Person> enInshallahWallahBallaBingBong = new KjedetOrdnetListe();
+		KjedetOrdnetListe<Person> enInshallahWallahBallaBingBong = new KjedetOrdnetListe<>();
 		Scanner scannerPikkenMin = new Scanner(System.in);
 		System.out.println("Skriv inn 4 personer med fornavn, etternavn og fødselsår");
 
