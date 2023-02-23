@@ -35,13 +35,11 @@ public class DobbelKjedetOrdnetListe<T extends Comparable<T>> implements DobbelK
     public void visListe() {
 
         DobbelNode<T> node = this.foerste.getNeste();
-
-        while (node != null) {
+        int pos = 0;
+        while (node != null && pos < antall) {
 			System.out.println(node.getElement());
             node = node.getNeste();
-            if (node.equals(siste)){
-                node = null;
-            }
+            pos++;
         }
     }
 
