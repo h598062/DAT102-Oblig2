@@ -4,22 +4,19 @@ import no.hvl.dat102.adt.DobbelKjedetOrdnetListeADT;
 import no.hvl.dat102.exceptions.EmptyCollectionException;
 
 public class DobbelKjedetOrdnetListe<T extends Comparable<T>> implements DobbelKjedetOrdnetListeADT<T> {
-	private DobbelNode<T> foerste;
-	private DobbelNode<T> siste;
-	private int antall;
+	private final DobbelNode<T> foerste;
+	private final DobbelNode<T> siste;
+	private       int           antall;
 
 	public DobbelKjedetOrdnetListe(T minVerdi, T maksVerdi) {
-		// Første node
-		//TODO
-		// Siste node
-		//TODO
-		// Kjeding
-		//TODO
+		this.foerste = new DobbelNode<>(minVerdi);
+		this.siste = new DobbelNode<>(maksVerdi);
+		this.antall = 0;
 	}
 
 	@Override
 	public void leggTil(T el) {
-		DobbelNode<T> nyNode = new DobbelNode<T>(el);
+		DobbelNode<T> nyNode = new DobbelNode<>(el);
 		DobbelNode<T> aktuell = foerste.getNeste();
 		while ((el.compareTo(aktuell.getElement()) > 0)) {
 			aktuell = aktuell.getNeste();
@@ -55,9 +52,31 @@ public class DobbelKjedetOrdnetListe<T extends Comparable<T>> implements DobbelK
 	 * null-referansen
 	 */
 	private DobbelNode<T> finn(T el) {
-		return null;
-		//TODO
+		boolean       funnet = false;
+		DobbelNode<T> node   = this.foerste.getNeste();
+		while(!funnet && node != null) {
+			if (node.getElement()
+			        .equals(el)) {
+				funnet = true;
+			} else {
+				node = node.getNeste();
+			}
+		}
+		return funnet ? node : null;
+	}
 
+	private boolean finnes(T el) {
+		boolean       funnet = false;
+		DobbelNode<T> node   = this.foerste.getNeste();
+		while(!funnet && node != null) {
+			if (node.getElement()
+			        .equals(el)) {
+				funnet = true;
+			} else {
+				node = node.getNeste();
+			}
+		}
+		return funnet;
 	}
 
 	@Override
