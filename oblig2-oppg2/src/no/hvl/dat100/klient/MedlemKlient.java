@@ -2,8 +2,6 @@ package no.hvl.dat100.klient;
 
 import no.hvl.dat100.Medlem;
 
-import java.util.Arrays;
-
 public class MedlemKlient {
 	public static void main(String[] args) {
 		Medlem[] medlemmer = new Medlem[3];
@@ -16,6 +14,8 @@ public class MedlemKlient {
 		medlemmer[1].leggTilHobby("Fotball");
 		medlemmer[2].leggTilHobby("Datamaskinspill");
 		medlemmer[2].leggTilHobby("Thomastoget");
-		System.out.println(Arrays.toString(medlemmer));
+		for (Medlem m : medlemmer) {
+			System.out.println(m);
+		}
 	}
 }

@@ -70,10 +70,9 @@ public class Medlem {
 
 	@Override
 	public String toString() {
-		return "Medlem{" + "navn='" + navn + '\'' +
-		       ", hobbyer=" + hobbyer +
-		       ", statusIndeks=" + statusIndeks +
-		       '}';
+		return "Medlem: \'" + navn + '\'' +
+		       ", hobbyer: " + hobbyer +
+		       ", partnerindeks: " + statusIndeks;
 	}
 
 	public String getNavn() {

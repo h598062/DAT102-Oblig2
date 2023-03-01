@@ -222,8 +222,8 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder("TabellMengde:");
-		sb.append(antall).append("{");
+		final StringBuilder sb = new StringBuilder();
+		sb.append(antall).append(": ");
 		int i = 0;
 		for (T e : this) {
 			sb.append(e);
@@ -232,7 +232,6 @@ public class TabellMengde<T> implements MengdeADT<T> {
 			}
 			i++;
 		}
-		sb.append('}');
 		return sb.toString();
 	}
 }

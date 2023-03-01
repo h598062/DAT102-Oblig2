@@ -124,16 +124,15 @@ public class Datakontakt {
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder("Datakontakt{");
-		sb.append("antallMedlemmer=").append(antallMedlemmer);
-		sb.append(", medlemsListe={");
+		final StringBuilder sb = new StringBuilder("Datakontakt\n");
+		sb.append("Medlemmer: ").append(antallMedlemmer);
+		sb.append("\n");
 		for (int i = 0; i < antallMedlemmer; i++) {
 			sb.append(medlemsListe[i]);
 			if (i < antallMedlemmer - 1) {
-				sb.append(", ");
+				sb.append("\n");
 			}
 		}
-		sb.append('}');
 		return sb.toString();
 	}
 }
