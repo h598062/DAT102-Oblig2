@@ -12,7 +12,6 @@ public class Tekstgrensenitt {
 	private Tekstgrensenitt() {
 	}
 
-	private static final Scanner scanner = new Scanner(System.in);
 	// Hvis du vil lage meny, kan du også legge det inn i Tekstgrensesnitt
 
 	/**
@@ -25,6 +24,7 @@ public class Tekstgrensenitt {
 	public static Medlem lesMedlem() {
 		System.out.println("Skriv inn et nytt medlem");
 		System.out.print("Skriv inn navnet på det nye medlemmet: ");
+		Scanner scanner = new Scanner(System.in);
 		String navn = scanner.nextLine();
 		while (navn.length() == 0) {
 			System.out.println("Navnet til medlemmet må være minst et tegn, prøv igjen.");
@@ -45,6 +45,7 @@ public class Tekstgrensenitt {
 			System.out.print("Skriv inn en til hobby til medlemmet: ");
 			hobby = scanner.nextLine();
 		}
+		scanner.close();
 		Medlem medlem;
 		if (!hobbyer.erTom()) {
 			medlem = new Medlem(navn, hobbyer);

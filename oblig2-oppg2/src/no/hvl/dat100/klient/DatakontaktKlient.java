@@ -25,8 +25,8 @@ public class DatakontaktKlient {
 		dk.leggTilMedlem(m3);
 		dk.leggTilMedlem(new Medlem("Gunn", new String[]{"Fotball", "Kjeks"}));
 		dk.leggTilMedlem(new Medlem("Solga", new String[]{"Fotball", "Kjeks"}));
-		dk.leggTilMedlem(new Medlem("Ragnhus", new String[]{"tiss"}));
-		dk.leggTilMedlem(new Medlem("Bo", new String[]{"tiss"}));
+		dk.leggTilMedlem(new Medlem("Ragnhus", new String[]{"se gresset vokse"}));
+		dk.leggTilMedlem(new Medlem("Bo", new String[]{"se gresset vokse"}));
 		dk.leggTilMedlem(new Medlem("Bingus"));
 		dk.leggTilMedlem(new Medlem("Bongo"));
 		dk.leggTilMedlem(new Medlem("WRÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆÆ"));
