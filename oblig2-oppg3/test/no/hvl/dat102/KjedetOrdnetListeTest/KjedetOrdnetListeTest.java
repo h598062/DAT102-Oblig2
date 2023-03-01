@@ -8,7 +8,7 @@ import no.hvl.dat102.kjedet.KjedetOrdnetListe;
 public class KjedetOrdnetListeTest extends OrdnetListeADTTest {
 	@Override
 	protected OrdnetListeADT<Integer> reset() {
-		return new KjedetOrdnetListe<Integer>();
+		return new KjedetOrdnetListe<>();
 	}
 }
 
